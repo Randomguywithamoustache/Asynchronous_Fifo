@@ -7,7 +7,7 @@
 
 FIFOs are often used to safely pass data from one clock domain to another asynchronous clock domain. Using a
 FIFO to pass data from one clock domain to another clock domain requires multi-asynchronous clock design
-techniques.
+techniques. And Ananaad (myself) is a noob.
 
 
 
