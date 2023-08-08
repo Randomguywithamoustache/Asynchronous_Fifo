@@ -33,4 +33,20 @@ wptr_full.v - this module is completely synchronous to the write-clock domain an
 
 ## Simulation reslts
 
+![alt text](https://github.com/Randomguywithamoustache/Asynchronous_Fifo/blob/main/modelsim_screenshot.png)
+
+Here the depth of fifo is 8, that is, there are 8 locations to be stored, from where the data will be read in the other clock domain.We need to employ an asynchronous FIFO between two modules working at  different clock domains when some amount of data has to be transmitted from one module to  the other to avoid the data loss. FIFO is required, only when you are slow at reading and fast in  writing to buffer the data which is not read by the slower module. 
+
+The depth (size) of the FIFO should be in such a way that, the FIFO can store all the  data which is not read by the slower module. FIFO will only work if the data comes in bursts; 
+we can't have continuous data in and out. If there is a continuous flow of data, then the size of the FIFO required should be infinite.
+
+###  Generating empty condition
+The Gray code write pointer must be synchronized into the read-clock domain through a pair of synchronizer registers found in the sync_w2r module. Since only one bit changes at a time using a Gray code pointer, there isno problem synchronizing multi-bit transitions between clock domains.In order to efficiently register the rempty output, the synchronized write pointer is actually compared against the rgraynext (the next Gray code that will be registered into the rptr). The empty value testing and the
+accompanying sequential always block has been extracted from the rptr_empty.v
+
+
+###  Generating full condition
+
+In order to efficiently register the wfull output, the synchronized read pointer is actually compared against the wgnext (the next Gray code that will be registered in the wptr).
+
 
