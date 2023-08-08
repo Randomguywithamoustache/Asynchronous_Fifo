@@ -49,4 +49,12 @@ accompanying sequential always block has been extracted from the rptr_empty.v
 
 In order to efficiently register the wfull output, the synchronized read pointer is actually compared against the wgnext (the next Gray code that will be registered in the wptr).
 
+### Results interpretation
+
+There are 8 address locations where data can be written into the FIFO, it will bw filled only when the w_rstn is enabled, w-inc is enabled and there is positive edge of the clock.
+ehwn all the conditions are met, data is sent into the burst of 8 locations, which are written into the fifo.when all the loaction are filled w_inc is left at '1', and the clock waits for the r_inc and r_rstn to be enabled. therse are enabled at the appropriate time into the testbench.
+
+We can observe when the fifo is full, that is, all addresses are written then w_full flag goes high.
+
+When we start reading from the fifo, (r_inc and r_rstn are enbled), at each r_clk, w_full flag goes low and one more data is written into the fifo(since one data is read).
 
